@@ -3,7 +3,7 @@ import goodConsole from 'good-console';
 import hapiPkg from 'hapi-pkg';
 import inert from 'inert';
 import vision from 'vision';
-import {version} from '../package.json';
+import { version } from '../../package.json';
 
 const goodPlugin = {
   register: good,
@@ -11,11 +11,11 @@ const goodPlugin = {
     reporters: [
       {
         reporter: goodConsole,
-        events: { response: '*', log: '*', error: '*' }
-      }
+        events: { response: '*', log: '*', error: '*' },
+      },
     ],
-    responsePayload: true
-  }
+    responsePayload: true,
+  },
 };
 
 const pkgPlugin = {
@@ -23,8 +23,8 @@ const pkgPlugin = {
   options: {
     pkg: { status: 'ok', version },
     endpoint: 'healthcheck',
-    config: { auth: false, description: 'Health status and version' }
-  }
+    config: { auth: false, description: 'Health status and version' },
+  },
 };
 
 /**
@@ -45,12 +45,12 @@ function loadPlugins(server, devMode = false) {
       inert,
       vision,
       goodPlugin,
-      pkgPlugin
+      pkgPlugin,
     ];
 
     if (devMode) {
       // Add your dev plugins here.
-      plugins = [ ...plugins ];
+      plugins = [...plugins];
     }
 
     server.register(plugins, (err) => {

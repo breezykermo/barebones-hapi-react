@@ -1,9 +1,10 @@
 import path from 'path';
 import React from 'react';
-import {Server} from 'hapi';
+import ReactDOMServer from 'react-dom/server';
+import { Server } from 'hapi';
 import { RoutingContext, match } from 'react-router';
 import loadPlugins from './loadPlugins';
-import routes from './app/routes';
+import routes from '../app/routes';
 
 const server = new Server();
 server.connection({ port: 8000 });
@@ -18,19 +19,19 @@ function code() {
       path: '/{p*}',
       handler: {
         directory: {
-          path: path.resolve(__dirname, 'public')
-        }
-      }
+          path: path.resolve(__dirname, 'public'),
+        },
+      },
     },
     {
       method: 'GET',
       path: '/bundle.js',
       handler: {
         file: {
-          path: path.resolve(__dirname, 'public/js/dist/bundle.js')
-        }
-      }
-    }
+          path: path.resolve(__dirname, 'public/js/dist/bundle.js'),
+        },
+      },
+    },
   ]);
 
   server.ext('onPreResponse', (request, reply) => {
@@ -52,7 +53,7 @@ function code() {
       }
 
       const InitialComponent = <RoutingContext {...renderProps} />;
-      const componentHTML = React.renderToString(InitialComponent);
+      const componentHTML = ReactDOMServer.renderToString(InitialComponent);
 
       const html = `
         <!DOCTYPE html>
