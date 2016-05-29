@@ -10,5 +10,5 @@ export default {
     about: 'Unaccepted in Canada, admired elsewhere.',
     github: 'nategeier',
     twitter: 'nategeier',
-  }
+  },
 };
